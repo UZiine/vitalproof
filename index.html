@@ -3,335 +3,303 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta property="og:title" content="VitalProof — FDA cybersecurity documentation & AI app security">
-<meta property="og:description" content="Section 524B gap reviews, SBOM review, trace checks and AI app security testing. Fixed prices, no calls.">
 <title>VitalProof</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="VitalProof — FDA medical device cybersecurity documentation and AI app security testing. Fixed prices, written deliverables, no calls.">
+<meta name="description" content="VitalProof — FDA medical device cybersecurity documentation review and AI app security testing. Fixed prices, no calls.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: premium dark — glow + grain hero with live-looking findings card, two service lines as product grids linking to Upwork, process, sample, founder, FAQ. Matches the v10 gallery set. */
+/* Layout: Vanta-like structure in VitalProof brand — Sora wordmark (Vital bold / Proof light), teal→blue gradient, near-black accents, network-line motif; centered hero over an animated product panel, regulation strip, card grid with live mini-UIs, tinted "why now" band, short copy everywhere. Single deliberate light look. */
 :root{
-  color-scheme: dark;
-  --bg:#05070f; --bg2:#080c19; --glass:#0a1022; --line:#1c2742; --hair:#2b3858;
-  --ink:#eef2f9; --sub:#9aa7c0; --faint:#66728c;
-  --blue:#7aa0f5; --teal:#6edccd; --violet:#8e78ff; --red:#e86e6e; --amber:#e2b260;
-  --grad:linear-gradient(100deg,#e8f0ff 0%,#6edccd 100%);
-  --silver:linear-gradient(180deg,#f6f8fc 0%,#b0c4de 100%);
-  --display:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
-  --body:"Manrope","Segoe UI",system-ui,sans-serif;
+  color-scheme: light;
+  --paper:#f6f8fa; --white:#ffffff; --mist:#eaeef2; --line:#dde3ea;
+  --ink:#0d1117; --sub:#55606f; --faint:#8a94a3;
+  --teal:#169e8e; --teal-2:#2cc2a8; --blue:#3b7fe0; --deep:#0d1117; --mint:#e1f4f1; --mint-2:#bfe9e1; --brand:linear-gradient(100deg,#2cc2a8 0%,#33a6cf 50%,#3b7fe0 100%);
+  --red:#d9534f; --amber:#d99a2b; --ok:#13a07f;
+  --serif:"Sora","Segoe UI",system-ui,sans-serif;
+  --sans:"Figtree","Segoe UI",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--white)}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
-.wrap{max-width:1140px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700}
-h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.025em}
-h2{font-size:clamp(30px,4.2vw,44px);line-height:1.1;font-weight:800}
-h3{font-size:19px;font-weight:700;letter-spacing:-.01em}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;font-family:var(--serif);font-weight:600;letter-spacing:-.035em;text-wrap:balance}
 p{margin:0}
-.lede{color:var(--sub);font-size:17px;max-width:60ch}
-.gt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sv{background:var(--silver);-webkit-background-clip:text;background-clip:text;color:transparent}
-
-/* atmosphere */
-.atmo{position:fixed;inset:0;pointer-events:none;z-index:-1;
-  background:
-   radial-gradient(700px 480px at 88% -6%, rgba(40,90,210,.30), transparent 70%),
-   radial-gradient(600px 460px at 100% 95%, rgba(20,120,120,.20), transparent 70%),
-   radial-gradient(560px 420px at -10% 90%, rgba(70,50,170,.22), transparent 70%)}
-.atmo::after{content:"";position:absolute;inset:0;opacity:.05;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+.mark{background:var(--brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tealtxt{background:var(--brand);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* header */
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(5,7,15,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:18px;text-decoration:none}
-.mark{width:26px;height:26px;border-radius:8px;background:radial-gradient(circle at 30% 30%,#6edccd,#1d5f86 75%);box-shadow:0 0 22px rgba(110,220,205,.35);position:relative}
-.mark::after{content:"";position:absolute;inset:8px;border:2px solid var(--bg);border-radius:50%}
-nav{display:flex;gap:24px;font-size:14px;color:var(--sub)}
-nav a{text-decoration:none}nav a:hover{color:var(--ink)}
-@media (max-width:820px){nav{display:none}}
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:14px;padding:12px 20px;border-radius:12px;text-decoration:none;border:1px solid transparent;transition:transform .15s,box-shadow .15s,border-color .15s}
-.btn.primary{background:linear-gradient(100deg,#9fc0ff,#6edccd);color:#04101a;box-shadow:0 8px 30px -10px rgba(110,220,205,.6)}
-.btn.primary:hover{transform:translateY(-1px)}
-.btn.ghost{border-color:var(--hair);color:var(--ink)}
-.btn.ghost:hover{border-color:var(--teal)}
+.logo{font-family:var(--serif);font-weight:300;font-size:25px;letter-spacing:-.02em;text-decoration:none;color:var(--deep);display:flex;align-items:center}
+.logo b{font-weight:700}
+.logo span{background:var(--brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav{display:flex;gap:28px;font-size:15px;font-weight:500}
+nav a{text-decoration:none;color:var(--ink)}nav a:hover{color:var(--teal)}
+@media (max-width:860px){nav{display:none}}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:15px;text-decoration:none;border-radius:999px;padding:12px 14px 12px 22px;transition:transform .15s,background .15s}
+.btn .ar{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:15px}
+.btn.dark{background:var(--deep);color:#fff}.btn.dark .ar{background:var(--brand);color:#fff}
+.btn.dark:hover{transform:translateY(-1px)}
+.btn.line{border:1px solid var(--ink);padding:11px 20px}
+.btn.line:hover{background:var(--white)}
 
-/* founding badge */
-.found{display:inline-flex;align-items:center;gap:12px;padding:8px 16px 8px 14px;border-radius:999px;background:rgba(10,20,34,.8);border:1px solid rgba(110,220,205,.5);box-shadow:0 0 30px -8px rgba(110,220,205,.45)}
-.found .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--teal);font-weight:700}
-.found .v{font-family:var(--display);font-weight:800;font-size:14px}
+/* announcement */
+.announce{background:var(--deep);color:#fff !important;border-radius:22px 22px 0 0;text-align:center;padding:12px 16px;font-weight:600;font-size:14.5px;color:var(--deep)}
+.announce b{font-family:var(--mono);font-size:12px;letter-spacing:.08em;margin-right:8px;color:var(--teal-2)}
 
 /* hero */
-.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-block:72px 80px}
-@media (max-width:920px){.hero .wrap{grid-template-columns:1fr;padding-block:48px 56px}}
-.hero h1{font-size:clamp(40px,6vw,66px);line-height:1.02;font-weight:800;margin:20px 0}
-.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
-.chip{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:7px 12px;border-radius:8px;border:1px solid var(--hair);color:#c8d4eb;background:rgba(10,16,32,.7)}
-.chip.on{color:var(--teal);border-color:rgba(110,220,205,.45)}
+.hero-shell{margin:22px auto 0;max-width:1240px;padding-inline:max(12px,env(safe-area-inset-left,0px))}
+.hero{background:radial-gradient(700px 380px at 15% -5%, rgba(44,194,168,.22) 0%, transparent 65%), radial-gradient(700px 380px at 90% 0%, rgba(59,127,224,.22) 0%, transparent 65%), linear-gradient(180deg,#f2f8fb, #f6f8fa 85%);border:1px solid var(--line);border-radius:0 0 28px 28px;padding:64px 20px 0;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='1200'%20height='560'%20viewBox='0%200%201200%20560'%3E%3Cg%20stroke='%231f9fb0'%20stroke-opacity='0.22'%20stroke-width='1'%3E%3Cline%20x1='389'%20y1='84'%20x2='544'%20y2='168'/%3E%3Cline%20x1='389'%20y1='84'%20x2='173'%20y2='66'/%3E%3Cline%20x1='781'%20y1='41'%20x2='657'%20y2='35'/%3E%3Cline%20x1='781'%20y1='41'%20x2='875'%20y2='161'/%3E%3Cline%20x1='643'%20y1='205'%20x2='693'%20y2='222'/%3E%3Cline%20x1='643'%20y1='205'%20x2='696'%20y2='255'/%3E%3Cline%20x1='70'%20y1='284'%20x2='45'%20y2='243'/%3E%3Cline%20x1='70'%20y1='284'%20x2='47'%20y2='374'/%3E%3Cline%20x1='45'%20y1='243'%20x2='70'%20y2='284'/%3E%3Cline%20x1='45'%20y1='243'%20x2='72'%20y2='115'/%3E%3Cline%20x1='84'%20y1='51'%20x2='72'%20y2='115'/%3E%3Cline%20x1='84'%20y1='51'%20x2='173'%20y2='66'/%3E%3Cline%20x1='509'%20y1='463'%20x2='502'%20y2='424'/%3E%3Cline%20x1='509'%20y1='463'%20x2='630'%20y2='490'/%3E%3Cline%20x1='149'%20y1='125'%20x2='173'%20y2='66'/%3E%3Cline%20x1='149'%20y1='125'%20x2='72'%20y2='115'/%3E%3Cline%20x1='753'%20y1='531'%20x2='630'%20y2='490'/%3E%3Cline%20x1='753'%20y1='531'%20x2='834'%20y2='333'/%3E%3Cline%20x1='693'%20y1='222'%20x2='696'%20y2='255'/%3E%3Cline%20x1='693'%20y1='222'%20x2='643'%20y2='205'/%3E%3Cline%20x1='1172'%20y1='26'%20x2='1176'%20y2='66'/%3E%3Cline%20x1='1172'%20y1='26'%20x2='1051'%20y2='176'/%3E%3Cline%20x1='1030'%20y1='162'%20x2='1051'%20y2='176'/%3E%3Cline%20x1='1030'%20y1='162'%20x2='875'%20y2='161'/%3E%3Cline%20x1='173'%20y1='66'%20x2='149'%20y2='125'/%3E%3Cline%20x1='173'%20y1='66'%20x2='84'%20y2='51'/%3E%3Cline%20x1='370'%20y1='457'%20x2='377'%20y2='328'/%3E%3Cline%20x1='370'%20y1='457'%20x2='502'%20y2='424'/%3E%3Cline%20x1='217'%20y1='326'%20x2='182'%20y2='274'/%3E%3Cline%20x1='217'%20y1='326'%20x2='293'%20y2='322'/%3E%3Cline%20x1='767'%20y1='209'%20x2='816'%20y2='239'/%3E%3Cline%20x1='767'%20y1='209'%20x2='693'%20y2='222'/%3E%3Cline%20x1='657'%20y1='35'%20x2='781'%20y2='41'/%3E%3Cline%20x1='657'%20y1='35'%20x2='643'%20y2='205'/%3E%3Cline%20x1='72'%20y1='115'%20x2='84'%20y2='51'/%3E%3Cline%20x1='72'%20y1='115'%20x2='149'%20y2='125'/%3E%3Cline%20x1='816'%20y1='239'%20x2='767'%20y2='209'/%3E%3Cline%20x1='816'%20y1='239'%20x2='834'%20y2='333'/%3E%3Cline%20x1='377'%20y1='328'%20x2='293'%20y2='322'/%3E%3Cline%20x1='377'%20y1='328'%20x2='370'%20y2='457'/%3E%3Cline%20x1='544'%20y1='168'%20x2='643'%20y2='205'/%3E%3Cline%20x1='544'%20y1='168'%20x2='693'%20y2='222'/%3E%3Cline%20x1='953'%20y1='391'%20x2='917'%20y2='321'/%3E%3Cline%20x1='953'%20y1='391'%20x2='834'%20y2='333'/%3E%3Cline%20x1='293'%20y1='322'%20x2='217'%20y2='326'/%3E%3Cline%20x1='293'%20y1='322'%20x2='377'%20y2='328'/%3E%3Cline%20x1='630'%20y1='490'%20x2='509'%20y2='463'/%3E%3Cline%20x1='630'%20y1='490'%20x2='753'%20y2='531'/%3E%3Cline%20x1='875'%20y1='161'%20x2='816'%20y2='239'/%3E%3Cline%20x1='875'%20y1='161'%20x2='767'%20y2='209'/%3E%3Cline%20x1='1176'%20y1='66'%20x2='1172'%20y2='26'/%3E%3Cline%20x1='1176'%20y1='66'%20x2='1051'%20y2='176'/%3E%3Cline%20x1='502'%20y1='424'%20x2='509'%20y2='463'/%3E%3Cline%20x1='502'%20y1='424'%20x2='370'%20y2='457'/%3E%3Cline%20x1='182'%20y1='274'%20x2='217'%20y2='326'/%3E%3Cline%20x1='182'%20y1='274'%20x2='70'%20y2='284'/%3E%3Cline%20x1='47'%20y1='374'%20x2='70'%20y2='284'/%3E%3Cline%20x1='47'%20y1='374'%20x2='45'%20y2='243'/%3E%3Cline%20x1='917'%20y1='321'%20x2='953'%20y2='391'/%3E%3Cline%20x1='917'%20y1='321'%20x2='834'%20y2='333'/%3E%3Cline%20x1='1051'%20y1='176'%20x2='1030'%20y2='162'/%3E%3Cline%20x1='1051'%20y1='176'%20x2='1176'%20y2='66'/%3E%3Cline%20x1='834'%20y1='333'%20x2='917'%20y2='321'/%3E%3Cline%20x1='834'%20y1='333'%20x2='816'%20y2='239'/%3E%3Cline%20x1='696'%20y1='255'%20x2='693'%20y2='222'/%3E%3Cline%20x1='696'%20y1='255'%20x2='643'%20y2='205'/%3E%3Cline%20x1='1008'%20y1='529'%20x2='953'%20y2='391'/%3E%3Cline%20x1='1008'%20y1='529'%20x2='917'%20y2='321'/%3E%3C/g%3E%3Cg%20fill='%231f9fb0'%20fill-opacity='0.48400000000000004'%3E%3Ccircle%20cx='389'%20cy='84'%20r='3.4'/%3E%3Ccircle%20cx='781'%20cy='41'%20r='1.6'/%3E%3Ccircle%20cx='643'%20cy='205'%20r='1.6'/%3E%3Ccircle%20cx='70'%20cy='284'%20r='2.6'/%3E%3Ccircle%20cx='45'%20cy='243'%20r='3.4'/%3E%3Ccircle%20cx='84'%20cy='51'%20r='2.6'/%3E%3Ccircle%20cx='509'%20cy='463'%20r='3.4'/%3E%3Ccircle%20cx='149'%20cy='125'%20r='2.6'/%3E%3Ccircle%20cx='753'%20cy='531'%20r='1.6'/%3E%3Ccircle%20cx='693'%20cy='222'%20r='3.4'/%3E%3Ccircle%20cx='1172'%20cy='26'%20r='2.6'/%3E%3Ccircle%20cx='1030'%20cy='162'%20r='2'/%3E%3Ccircle%20cx='173'%20cy='66'%20r='1.6'/%3E%3Ccircle%20cx='370'%20cy='457'%20r='3.4'/%3E%3Ccircle%20cx='217'%20cy='326'%20r='1.6'/%3E%3Ccircle%20cx='767'%20cy='209'%20r='2'/%3E%3Ccircle%20cx='657'%20cy='35'%20r='2.6'/%3E%3Ccircle%20cx='72'%20cy='115'%20r='2'/%3E%3Ccircle%20cx='816'%20cy='239'%20r='2'/%3E%3Ccircle%20cx='377'%20cy='328'%20r='3.4'/%3E%3Ccircle%20cx='544'%20cy='168'%20r='3.4'/%3E%3Ccircle%20cx='953'%20cy='391'%20r='3.4'/%3E%3Ccircle%20cx='293'%20cy='322'%20r='1.6'/%3E%3Ccircle%20cx='630'%20cy='490'%20r='2'/%3E%3Ccircle%20cx='875'%20cy='161'%20r='3.4'/%3E%3Ccircle%20cx='1176'%20cy='66'%20r='3.4'/%3E%3Ccircle%20cx='502'%20cy='424'%20r='2.6'/%3E%3Ccircle%20cx='182'%20cy='274'%20r='2'/%3E%3Ccircle%20cx='47'%20cy='374'%20r='3.4'/%3E%3Ccircle%20cx='917'%20cy='321'%20r='2.6'/%3E%3Ccircle%20cx='1051'%20cy='176'%20r='3.4'/%3E%3Ccircle%20cx='834'%20cy='333'%20r='2.6'/%3E%3Ccircle%20cx='696'%20cy='255'%20r='3.4'/%3E%3Ccircle%20cx='1008'%20cy='529'%20r='2'/%3E%3C/g%3E%3C/svg%3E");background-size:1200px 560px;background-position:center top;background-repeat:no-repeat;mask-image:linear-gradient(90deg,#000 0%,transparent 30%,transparent 70%,#000 100%);-webkit-mask-image:linear-gradient(90deg,#000 0%,transparent 30%,transparent 70%,#000 100%);pointer-events:none}
+.hero h1{font-size:clamp(40px,6.4vw,74px);line-height:1.04;max-width:20ch;margin:0 auto;position:relative}
+.hero .sub{font-size:clamp(17px,1.6vw,20px);color:var(--sub);max-width:46ch;margin:22px auto 0;position:relative}
+.hero .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px;position:relative}
+.hero .for{margin-top:18px;font-size:14px;color:var(--faint);position:relative}
 
-.glass{position:relative;background:rgba(9,14,30,.92);border-radius:24px;min-width:0}
-.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,#96b4f0,#6ed2c8);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.glass.glow{box-shadow:0 40px 90px -40px rgba(60,120,255,.55)}
-.card-head{display:flex;justify-content:space-between;padding:22px 26px 6px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--sub);font-weight:700}
-.card-head span:last-child{color:var(--faint);font-weight:400}
-.find{padding:18px 26px;border-top:1px solid #16203a}
-.find:first-of-type{border-top:0}
-.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;padding:4px 12px;border-radius:999px;border:1.4px solid;background:#0e1426}
-.p-crit{color:var(--red);border-color:var(--red)}.p-high{color:#ec8c60;border-color:#ec8c60}.p-med{color:var(--amber);border-color:var(--amber)}.p-ok{color:var(--teal);border-color:var(--teal)}.p-low{color:#c8d4eb;border-color:#c8d4eb}
-.find .t{font-weight:700;font-size:16px;margin-top:10px}
-.find .f{color:var(--sub);font-size:13.5px;margin-top:2px}
+/* animated product panel (the "video") */
+.stage{position:relative;max-width:980px;margin:52px auto 0;background:var(--white);border:1px solid var(--line);border-bottom:0;border-radius:22px 22px 0 0;box-shadow:0 -10px 60px -30px rgba(18,60,67,.35);text-align:left;overflow:hidden}
+.st-top{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--mist)}
+.st-title{font-weight:600;font-size:14.5px}
+.st-tag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.08em}
+.st-body{display:grid;grid-template-columns:240px 1fr;min-height:330px}
+@media (max-width:760px){.st-body{grid-template-columns:1fr}.st-side{display:none}}
+.st-side{border-right:1px solid var(--line);padding:22px;display:grid;gap:18px;align-content:start;background:#fbfbf9}
+.meter{font-family:var(--serif);font-size:44px;line-height:1}
+.meter small{font-family:var(--sans);font-size:14px;color:var(--sub);margin-left:4px}
+.bar2{height:8px;border-radius:99px;background:var(--mist);overflow:hidden}
+.bar2 i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal-2),var(--teal));transition:width .6s ease}
+.legend{display:grid;gap:8px;font-size:13.5px}
+.legend span{display:flex;justify-content:space-between}
+.legend b{font-family:var(--mono);font-size:12.5px}
+.st-main{padding:8px 22px 22px}
+.rowx{display:grid;grid-template-columns:1.2fr 1fr .9fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #f0efe9;font-size:14px;opacity:.35;transition:opacity .4s}
+.rowx.on{opacity:1}
+.rowx .th{font-weight:600}
+.rowx .c{color:var(--sub)}
+.st{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 10px;border-radius:99px;min-width:86px;text-align:center;background:var(--mist);color:var(--faint)}
+.st.ok{background:#dcf3ea;color:var(--ok)}.st.bad{background:#fbe3e2;color:var(--red)}.st.warn{background:#fbefd8;color:#b67a10}
+.st.run{background:#e7f0ff;color:#3b6fd8}
+.rowhead{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--faint);opacity:1}
+@media (max-width:600px){.rowx{grid-template-columns:1fr auto}.rowx .c{display:none}}
+@media (prefers-reduced-motion:reduce){.rowx{opacity:1;transition:none}.bar2 i{transition:none}}
 
-section{padding-block:88px}
-.sh{display:grid;gap:14px;margin-bottom:44px;max-width:760px}
-.band{background:linear-gradient(180deg,rgba(8,12,25,.75),rgba(8,12,25,.35));border-block:1px solid var(--line)}
+/* rules strip */
+.strip{padding:48px 0 26px;text-align:center}
+.strip .k{font-size:12.5px;font-weight:700;letter-spacing:.14em;color:var(--sub)}
+.rules{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;margin-top:22px;font-family:var(--serif);font-size:24px;color:#3d3c52}
+.rules span small{display:block;font-family:var(--sans);font-size:12px;color:var(--faint);margin-top:2px}
 
-/* products */
-.line-h{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:8px 0 18px}
-.line-h h3{font-size:22px}
-.line-h p{color:var(--sub);font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:48px}
-.grid.two{grid-template-columns:repeat(2,1fr)}
-@media (max-width:900px){.grid,.grid.two{grid-template-columns:1fr}}
-.prod{display:flex;flex-direction:column;gap:14px;padding:26px;text-decoration:none;transition:transform .18s}
-.prod:hover{transform:translateY(-3px)}
-.prod .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--faint);font-weight:700}
-.prod .tag.lead{color:var(--teal)}
-.price{font-family:var(--display);font-weight:800;font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
-.price small{font-family:var(--body);font-size:14px;font-weight:600;color:var(--sub);margin-left:6px;-webkit-text-fill-color:var(--sub)}
-.prod ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;color:#d6deee;font-size:14.5px}
-.prod li{display:flex;gap:10px}
-.prod li::before{content:"";flex:none;width:14px;height:8px;margin-top:6px;border-left:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg)}
-.prod .go{margin-top:auto;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--teal)}
-.offer-note{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:22px 26px;border-radius:18px;border:1px dashed rgba(110,220,205,.45);background:rgba(10,22,34,.5)}
-.offer-note b{font-family:var(--display)}
-.offer-note span{color:var(--sub);font-size:14.5px}
+/* sections */
+section{padding-block:90px}
+.h2{font-size:clamp(34px,4.6vw,56px);line-height:1.06;text-align:center;max-width:20ch;margin:0 auto}
+.lead{color:var(--sub);font-size:18px;text-align:center;max-width:52ch;margin:16px auto 0}
 
-/* process */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media (max-width:820px){.steps{grid-template-columns:1fr}}
-.step{padding:28px;display:grid;gap:10px;align-content:start}
-.step .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--teal)}
-.step .n span{color:var(--faint);font-weight:400;margin-left:10px}
-.step h3{font-size:26px;font-weight:800}
-.step p{color:var(--sub);font-size:15px}
-.step .get{border-top:1px solid var(--hair);padding-top:14px;margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--teal);font-weight:700}
-.step .get b{display:block;font-family:var(--body);font-size:15px;letter-spacing:0;color:var(--ink);margin-top:4px}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px}
+@media (max-width:920px){.cards{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.cards{grid-template-columns:1fr}}
+.card{text-decoration:none;display:grid;gap:14px;align-content:start}
+.vis{aspect-ratio:4/3;max-width:100%;border-radius:20px;background:var(--mist);display:grid;place-items:center;padding:22px;transition:transform .2s;position:relative;overflow:hidden}
+.card:hover .vis{transform:translateY(-3px)}
+.vis.mint{background:var(--mint)}
+.card h3{font-size:26px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.card h3 .p{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--teal);background:var(--mint);border-radius:99px;padding:3px 10px;letter-spacing:0}
+.card p{color:var(--sub);font-size:15px}
+.chiptag{font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--teal)}
+.mini{background:var(--white);border-radius:14px;box-shadow:0 10px 30px -18px rgba(22,21,43,.45);padding:14px 16px;font-size:13px;width:min(100%,260px);display:grid;gap:8px}
+.mini .ln{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mini .ln span{color:var(--sub)}
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.float2{animation-delay:-1.2s}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+.chat{display:grid;gap:8px;width:min(100%,270px)}
+.bub{background:var(--white);border-radius:12px;padding:9px 12px;font-size:12.5px;box-shadow:0 8px 24px -16px rgba(22,21,43,.5)}
+.bub.u{justify-self:end;background:var(--deep);color:#fff}
+.bub b{color:var(--red)}
 
-/* table */
-.tw{overflow-x:auto;border-radius:22px}
-table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
-th,td{text-align:left;padding:16px 24px;border-bottom:1px solid #16203a;vertical-align:top}
-th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--faint);font-weight:700}
-tr:last-child td{border-bottom:0}
-td .fx{color:var(--sub);font-size:13px;margin-top:3px}
-td.o{font-family:var(--mono);font-size:12.5px;color:var(--sub);white-space:nowrap}
-.cap{margin-top:12px;font-size:12.5px;color:var(--faint);font-family:var(--mono)}
+/* why band */
+.band{background:linear-gradient(120deg,#e0f5f1,#e3edfb);border-radius:28px;margin-inline:max(12px,env(safe-area-inset-left,0px));padding-block:84px}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px}
+@media (max-width:860px){.why{grid-template-columns:1fr}}
+.why div{background:var(--white);border-radius:20px;padding:28px}
+.why .n{font-family:var(--serif);font-size:44px;line-height:1;color:var(--deep)}
+.why h3{font-family:var(--sans);font-weight:700;font-size:17px;margin-top:14px;letter-spacing:0}
+.why p{color:var(--sub);font-size:15px;margin-top:6px}
+.why a{font-size:12.5px;color:var(--teal);font-weight:600;display:inline-block;margin-top:10px}
 
-/* founder */
-.founder{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media (max-width:820px){.founder{grid-template-columns:1fr}}
-.fcol{padding:28px;display:grid;gap:22px;align-content:start}
-.fi .l{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--teal);font-weight:700;margin-bottom:6px}
-.fi b{font-family:var(--display);font-size:18px;display:block}
-.fi span{color:var(--sub);font-size:14px}
-.terms{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+/* accuracy */
+.acc{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px}
+@media (max-width:860px){.acc{grid-template-columns:1fr}}
+.acc div{border-top:2px solid var(--ink);padding-top:18px}
+.acc h3{font-size:24px}
+.acc p{color:var(--sub);font-size:15px;margin-top:8px}
 
-/* faq */
-.faq{max-width:820px;border-top:1px solid var(--line)}
-details{border-bottom:1px solid var(--line)}
-summary{cursor:pointer;list-style:none;padding:22px 0;font-family:var(--display);font-weight:700;font-size:17px;display:flex;justify-content:space-between;gap:16px}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--teal);font-family:var(--mono)}
-details[open] summary::after{content:"–"}
-details p{color:var(--sub);padding-bottom:22px;max-width:68ch}
+/* quote-like statement */
+.state{font-family:var(--serif);font-size:clamp(30px,4vw,48px);line-height:1.15;text-align:center;max-width:24ch;margin:0 auto;color:var(--deep)}
+.who{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:30px;flex-wrap:wrap;text-align:left}
+.ava{width:52px;height:52px;border-radius:50%;background:var(--brand);display:grid;place-items:center;color:#fff;font-family:var(--serif);font-weight:700;font-size:22px}
+.who b{display:block}.who span{color:var(--sub);font-size:14px}
+.creds{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
+.creds span{background:var(--white);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:13.5px}
 
-.cta{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:40px}
-@media (max-width:760px){.cta{grid-template-columns:1fr;padding:28px}}
-footer{border-top:1px solid var(--line);padding-block:34px 44px;color:var(--faint);font-size:12.5px;font-family:var(--mono)}
+/* offer + footer */
+.offer{background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='900'%20height='420'%20viewBox='0%200%20900%20420'%3E%3Cg%20stroke='%23ffffff'%20stroke-opacity='0.28'%20stroke-width='1'%3E%3Cline%20x1='136'%20y1='74'%20x2='136'%20y2='43'/%3E%3Cline%20x1='136'%20y1='74'%20x2='134'%20y2='106'/%3E%3Cline%20x1='209'%20y1='98'%20x2='134'%20y2='106'/%3E%3Cline%20x1='209'%20y1='98'%20x2='136'%20y2='74'/%3E%3Cline%20x1='436'%20y1='247'%20x2='377'%20y2='155'/%3E%3Cline%20x1='436'%20y1='247'%20x2='556'%20y2='284'/%3E%3Cline%20x1='236'%20y1='2'%20x2='327'%20y2='11'/%3E%3Cline%20x1='236'%20y1='2'%20x2='145'%20y2='10'/%3E%3Cline%20x1='377'%20y1='155'%20x2='313'%20y2='153'/%3E%3Cline%20x1='377'%20y1='155'%20x2='436'%20y2='247'/%3E%3Cline%20x1='510'%20y1='400'%20x2='556'%20y2='284'/%3E%3Cline%20x1='510'%20y1='400'%20x2='436'%20y2='247'/%3E%3Cline%20x1='621'%20y1='217'%20x2='556'%20y2='284'/%3E%3Cline%20x1='621'%20y1='217'%20x2='718'%20y2='165'/%3E%3Cline%20x1='556'%20y1='284'%20x2='621'%20y2='217'/%3E%3Cline%20x1='556'%20y1='284'%20x2='436'%20y2='247'/%3E%3Cline%20x1='49'%20y1='378'%20x2='111'%20y2='357'/%3E%3Cline%20x1='49'%20y1='378'%20x2='24'%20y2='222'/%3E%3Cline%20x1='702'%20y1='367'%20x2='787'%20y2='258'/%3E%3Cline%20x1='702'%20y1='367'%20x2='556'%20y2='284'/%3E%3Cline%20x1='718'%20y1='165'%20x2='621'%20y2='217'/%3E%3Cline%20x1='718'%20y1='165'%20x2='787'%20y2='258'/%3E%3Cline%20x1='359'%20y1='43'%20x2='327'%20y2='11'/%3E%3Cline%20x1='359'%20y1='43'%20x2='435'%20y2='36'/%3E%3Cline%20x1='571'%20y1='26'%20x2='435'%20y2='36'/%3E%3Cline%20x1='571'%20y1='26'%20x2='621'%20y2='217'/%3E%3Cline%20x1='61'%20y1='88'%20x2='92'%20y2='144'/%3E%3Cline%20x1='61'%20y1='88'%20x2='134'%20y2='106'/%3E%3Cline%20x1='146'%20y1='143'%20x2='134'%20y2='106'/%3E%3Cline%20x1='146'%20y1='143'%20x2='92'%20y2='144'/%3E%3Cline%20x1='47'%20y1='0'%20x2='61'%20y2='88'/%3E%3Cline%20x1='47'%20y1='0'%20x2='145'%20y2='10'/%3E%3Cline%20x1='136'%20y1='43'%20x2='136'%20y2='74'/%3E%3Cline%20x1='136'%20y1='43'%20x2='145'%20y2='10'/%3E%3Cline%20x1='327'%20y1='11'%20x2='359'%20y2='43'/%3E%3Cline%20x1='327'%20y1='11'%20x2='236'%20y2='2'/%3E%3Cline%20x1='787'%20y1='258'%20x2='856'%20y2='222'/%3E%3Cline%20x1='787'%20y1='258'%20x2='718'%20y2='165'/%3E%3Cline%20x1='134'%20y1='106'%20x2='136'%20y2='74'/%3E%3Cline%20x1='134'%20y1='106'%20x2='146'%20y2='143'/%3E%3Cline%20x1='313'%20y1='153'%20x2='377'%20y2='155'/%3E%3Cline%20x1='313'%20y1='153'%20x2='209'%20y2='98'/%3E%3Cline%20x1='111'%20y1='357'%20x2='49'%20y2='378'/%3E%3Cline%20x1='111'%20y1='357'%20x2='238'%20y2='348'/%3E%3Cline%20x1='894'%20y1='196'%20x2='856'%20y2='222'/%3E%3Cline%20x1='894'%20y1='196'%20x2='787'%20y2='258'/%3E%3Cline%20x1='435'%20y1='36'%20x2='359'%20y2='43'/%3E%3Cline%20x1='435'%20y1='36'%20x2='327'%20y2='11'/%3E%3Cline%20x1='92'%20y1='144'%20x2='146'%20y2='143'/%3E%3Cline%20x1='92'%20y1='144'%20x2='134'%20y2='106'/%3E%3Cline%20x1='238'%20y1='348'%20x2='111'%20y2='357'/%3E%3Cline%20x1='238'%20y1='348'%20x2='132'%20y2='228'/%3E%3Cline%20x1='145'%20y1='10'%20x2='136'%20y2='43'/%3E%3Cline%20x1='145'%20y1='10'%20x2='136'%20y2='74'/%3E%3Cline%20x1='856'%20y1='222'%20x2='894'%20y2='196'/%3E%3Cline%20x1='856'%20y1='222'%20x2='787'%20y2='258'/%3E%3Cline%20x1='132'%20y1='228'%20x2='146'%20y2='143'/%3E%3Cline%20x1='132'%20y1='228'%20x2='92'%20y2='144'/%3E%3Cline%20x1='24'%20y1='222'%20x2='92'%20y2='144'/%3E%3Cline%20x1='24'%20y1='222'%20x2='132'%20y2='228'/%3E%3C/g%3E%3Cg%20fill='%23ffffff'%20fill-opacity='0.6160000000000001'%3E%3Ccircle%20cx='136'%20cy='74'%20r='1.6'/%3E%3Ccircle%20cx='209'%20cy='98'%20r='2.6'/%3E%3Ccircle%20cx='436'%20cy='247'%20r='2.6'/%3E%3Ccircle%20cx='236'%20cy='2'%20r='2'/%3E%3Ccircle%20cx='377'%20cy='155'%20r='2.6'/%3E%3Ccircle%20cx='510'%20cy='400'%20r='2'/%3E%3Ccircle%20cx='621'%20cy='217'%20r='2.6'/%3E%3Ccircle%20cx='556'%20cy='284'%20r='2'/%3E%3Ccircle%20cx='49'%20cy='378'%20r='2'/%3E%3Ccircle%20cx='702'%20cy='367'%20r='2'/%3E%3Ccircle%20cx='718'%20cy='165'%20r='3.4'/%3E%3Ccircle%20cx='359'%20cy='43'%20r='2'/%3E%3Ccircle%20cx='571'%20cy='26'%20r='2'/%3E%3Ccircle%20cx='61'%20cy='88'%20r='3.4'/%3E%3Ccircle%20cx='146'%20cy='143'%20r='2.6'/%3E%3Ccircle%20cx='47'%20cy='0'%20r='1.6'/%3E%3Ccircle%20cx='136'%20cy='43'%20r='1.6'/%3E%3Ccircle%20cx='327'%20cy='11'%20r='2.6'/%3E%3Ccircle%20cx='787'%20cy='258'%20r='3.4'/%3E%3Ccircle%20cx='134'%20cy='106'%20r='2.6'/%3E%3Ccircle%20cx='313'%20cy='153'%20r='2'/%3E%3Ccircle%20cx='111'%20cy='357'%20r='2.6'/%3E%3Ccircle%20cx='894'%20cy='196'%20r='3.4'/%3E%3Ccircle%20cx='435'%20cy='36'%20r='2.6'/%3E%3Ccircle%20cx='92'%20cy='144'%20r='2.6'/%3E%3Ccircle%20cx='238'%20cy='348'%20r='1.6'/%3E%3Ccircle%20cx='145'%20cy='10'%20r='2'/%3E%3Ccircle%20cx='856'%20cy='222'%20r='1.6'/%3E%3Ccircle%20cx='132'%20cy='228'%20r='2'/%3E%3Ccircle%20cx='24'%20cy='222'%20r='3.4'/%3E%3C/g%3E%3C/svg%3E") right center/900px 420px no-repeat, linear-gradient(100deg,#0d1117 0%,#0d1117 38%,#15807a 72%,#3b7fe0 100%);color:#fff;border-radius:28px;padding:56px 40px;text-align:center;margin-inline:max(12px,env(safe-area-inset-left,0px))}
+.offer .k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:#7fe6d4;font-weight:700}
+.offer h2{font-size:clamp(32px,4.4vw,52px);margin-top:14px}
+.offer p{color:#cfe3ee;margin:14px auto 0;max-width:46ch}
+.offer .btn.dark{background:#fff;color:var(--deep)}
+.offer .ctas{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+footer{padding-block:44px 54px;color:var(--faint);font-size:13px}
 footer .wrap{display:grid;gap:10px}
-footer .row{display:flex;flex-wrap:wrap;gap:18px}
-
-/* v3 additions: audience cards, why-strip, rules table, accuracy list */
-.hero h1{font-size:clamp(38px,5.4vw,60px)}
-.for{font-family:var(--mono);font-size:12.5px;color:var(--sub);margin-top:18px;letter-spacing:.02em}
-.for b{color:var(--ink);font-weight:700}
-.aud{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media (max-width:900px){.aud{grid-template-columns:1fr}}
-.aud .glass{padding:26px;display:grid;gap:10px;align-content:start}
-.aud .who{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--teal);font-weight:700}
-.aud h3{font-size:21px}
-.aud p{color:var(--sub);font-size:15px}
-.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
-@media (max-width:900px){.why{grid-template-columns:1fr}}
-.why div{padding:26px 26px 26px 0;border-bottom:1px solid var(--line)}
-.why .big{font-family:var(--display);font-weight:800;font-size:30px;line-height:1.1;letter-spacing:-.02em}
-.why p{color:var(--sub);font-size:14.5px;margin-top:8px}
-.why a{color:var(--faint);font-family:var(--mono);font-size:11.5px}
-.rules td:first-child{font-family:var(--display);font-weight:700;white-space:nowrap}
-.rules td{color:#d6deee}
-.rules td .s{display:block;font-family:var(--mono);font-size:11.5px;color:var(--faint);font-weight:400;margin-top:2px}
-.acc{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-@media (max-width:820px){.acc{grid-template-columns:1fr}}
-.acc .glass{padding:26px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
-.acc .num{font-family:var(--mono);font-weight:700;color:var(--teal);font-size:14px;padding-top:3px}
-.acc h3{font-size:18px}
-.acc p{color:var(--sub);font-size:14.5px;margin-top:4px}
-.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-.tabs .chip{font-size:12px}
+.faq{max-width:760px;margin:40px auto 0;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:20px 0;font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--teal);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--sub);padding-bottom:20px}
 </style>
 
 </head>
 <body>
-<div class="atmo" aria-hidden="true"></div>
-
 <header>
   <div class="wrap bar">
-    <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>VitalProof</a>
-    <nav aria-label="Sections"><a href="#who">Who it's for</a><a href="#why">Why now</a><a href="#rules">Rules covered</a><a href="#services">Services</a><a href="#accuracy">Accuracy</a></nav>
-    <a class="btn primary" href="https://www.upwork.com/freelancers/~010c6eb3916385fefa" target="_blank" rel="noopener">Order on Upwork</a>
+    <a class="logo" href="#top" aria-label="VitalProof"><b>Vital</b><span>Proof</span></a>
+    <nav aria-label="Sections"><a href="#services">Services</a><a href="#why">Why now</a><a href="#accuracy">Accuracy</a><a href="#faq">FAQ</a></nav>
+    <a class="btn dark" href="https://www.upwork.com/freelancers/~010c6eb3916385fefa" target="_blank" rel="noopener">Get started <span class="ar">→</span></a>
   </div>
 </header>
 
 <main id="top">
-  <div class="hero">
-    <div class="wrap">
-      <div>
-        <div class="found"><span class="k">FOUNDING CLIENTS</span><span class="v">30% off · first 3 orders</span></div>
-        <h1>Get your device's <span class="gt">FDA cybersecurity file</span> right before you submit.</h1>
-        <p class="lede">I check your section 524B documentation against FDA's current guidance and tell you exactly what is missing, broken or out of date — with the fix.</p>
-        <p class="for">FOR <b>medical device makers</b> preparing a 510(k), De Novo or PMA · also <b>AI app teams</b> testing chatbots and agents</p>
-        <div class="ctas">
-          <a class="btn primary" href="https://www.upwork.com/services/product/development-it-a-quick-review-of-your-fda-cybersecurity-section-with-top-5-gaps-2115372694720763526" target="_blank" rel="noopener">Start with a $249 review</a>
-          <a class="btn ghost" href="#rules">What rules this covers</a>
-        </div>
+  <div class="hero-shell">
+    <div class="announce"><b>FOUNDING CLIENTS</b>30% off your first order — message me before ordering</div>
+    <div class="hero">
+      <h1>Get your <span class="mark">FDA cybersecurity</span> file ready</h1>
+      <p class="sub">Section 524B and FDA's 2026 guidance, checked item by item — with the fix for every gap.</p>
+      <div class="ctas">
+        <a class="btn dark" href="https://www.upwork.com/services/product/development-it-a-quick-review-of-your-fda-cybersecurity-section-with-top-5-gaps-2115372694720763526" target="_blank" rel="noopener">Start with a $249 review <span class="ar">→</span></a>
+        <a class="btn line" href="#services">See all services</a>
       </div>
-      <div class="glass glow" role="figure" aria-label="Example trace findings">
-        <div class="card-head"><span>WHAT YOU GET BACK</span><span>SAMPLE</span></div>
-        <div class="find"><span class="pill p-crit">BROKEN</span><div class="t">Threat T-07 has no test</div><div class="f">Fix: add a test case or the residual-risk rationale</div></div>
-        <div class="find"><span class="pill p-high">MISSING</span><div class="t">3 SBOM parts lack support status</div><div class="f">Fix: add end-of-support dates and monitoring</div></div>
-        <div class="find"><span class="pill p-med">STALE</span><div class="t">Pen test predates the final build</div><div class="f">Fix: re-test, or justify equivalence</div></div>
+      <p class="for">For medical device makers · 510(k), De Novo, PMA</p>
+
+      <div class="stage" role="img" aria-label="Animated sample of a cybersecurity trace check">
+        <div class="st-top"><div class="dots"><i></i><i></i><i></i></div><span class="st-title">Trace check · infusion-pump-v2 (sample)</span><span class="st-tag">SAMPLE DATA</span></div>
+        <div class="st-body">
+          <div class="st-side">
+            <div><div class="meter" id="cnt">0<small>/ 6 traced</small></div></div>
+            <div class="bar2"><i id="prog"></i></div>
+            <div class="legend">
+              <span>Linked <b id="nOk" style="color:var(--ok)">0</b></span>
+              <span>Broken <b id="nBad" style="color:var(--red)">0</b></span>
+              <span>Stale <b id="nWarn" style="color:#b67a10">0</b></span>
+            </div>
+          </div>
+          <div class="st-main" id="rows">
+            <div class="rowx rowhead"><span>THREAT</span><span class="c">CONTROL</span><span class="c">TEST</span><span>STATUS</span></div>
+            <div class="rowx" data-s="ok"><span class="th">T-03 Firmware tamper</span><span class="c">Signed boot</span><span class="c">TS-11</span><span class="st">QUEUED</span></div>
+            <div class="rowx" data-s="bad"><span class="th">T-07 BLE replay</span><span class="c">Nonce</span><span class="c">—</span><span class="st">QUEUED</span></div>
+            <div class="rowx" data-s="ok"><span class="th">T-09 Cloud API abuse</span><span class="c">OAuth scopes</span><span class="c">TS-14</span><span class="st">QUEUED</span></div>
+            <div class="rowx" data-s="warn"><span class="th">T-12 Update rollback</span><span class="c">Version check</span><span class="c">TS-20 (2024)</span><span class="st">QUEUED</span></div>
+            <div class="rowx" data-s="bad"><span class="th">T-11 Log deletion</span><span class="c">Audit log</span><span class="c">—</span><span class="st">QUEUED</span></div>
+            <div class="rowx" data-s="ok"><span class="th">T-14 Default password</span><span class="c">Unique creds</span><span class="c">TS-22</span><span class="st">QUEUED</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <section id="who" class="band">
-    <div class="wrap">
-      <div class="sh"><div class="eyebrow">Who it's for</div><h2>Three situations <span class="gt">I help with.</span></h2></div>
-      <div class="aud">
-        <div class="glass"><span class="who">BEFORE SUBMISSION</span><h3>You are about to file with FDA</h3><p>Connected device, 510(k) / De Novo / PMA coming up, and nobody has checked the cybersecurity section end to end.</p></div>
-        <div class="glass"><span class="who">AFTER AN FDA REQUEST</span><h3>FDA asked about cybersecurity</h3><p>You received an additional-information request and need to know what evidence closes each item.</p></div>
-        <div class="glass"><span class="who">AI PRODUCTS</span><h3>Your app has a chatbot or agent</h3><p>It reads documents, web pages or e-mail, and you have not tested what a hidden instruction can make it do.</p></div>
-      </div>
+  <div class="wrap strip">
+    <div class="k">BUILT AROUND THE RULES YOUR REVIEWER USES</div>
+    <div class="rules">
+      <span>FDA §524B<small>US law</small></span>
+      <span>FDA guidance<small>Feb 3, 2026</small></span>
+      <span>eSTAR<small>submission format</small></span>
+      <span>EU MDR<small>MDCG 2019-16</small></span>
+      <span>Korea MFDS<small>on request</small></span>
+      <span>OWASP LLM<small>Top 10 · 2025</small></span>
     </div>
-  </section>
-
-  <section id="why">
-    <div class="wrap">
-      <div class="sh"><div class="eyebrow">Why it matters now</div><h2>Cybersecurity is <span class="gt">part of the submission.</span></h2></div>
-      <div class="why">
-        <div><div class="big">Section 524B</div><p>Since March 2023, US law requires “cyber devices” to include cybersecurity information in premarket submissions — including an SBOM and a vulnerability-management plan.</p></div>
-        <div><div class="big">Refuse to accept</div><p>From October 1, 2023, FDA may refuse to accept a cyber-device submission that leaves this information out. <a href="https://www.govinfo.gov/content/pkg/FR-2023-03-30/html/2023-06646.htm" target="_blank" rel="noopener">Federal Register ↗</a></p></div>
-        <div><div class="big">2026 guidance</div><p>FDA's premarket cybersecurity guidance was reissued on February 3, 2026, aligned with the new quality-management rule (QMSR). <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-management-system-considerations-and-content-premarket" target="_blank" rel="noopener">FDA ↗</a></p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="rules" class="band">
-    <div class="wrap">
-      <div class="sh"><div class="eyebrow">Rules covered</div><h2>What I check <span class="gt">your work against.</span></h2></div>
-      <div class="glass tw">
-        <table class="rules">
-          <thead><tr><th>RULE / STANDARD</th><th>WHAT IT ASKS FOR</th><th>WHAT YOU GET</th></tr></thead>
-          <tbody>
-            <tr><td>FDA · Section 524B<span class="s">FD&amp;C Act · US</span></td><td>SBOM, vulnerability-management plan, evidence of reasonable assurance of cybersecurity</td><td>Gap list and SBOM review</td></tr>
-            <tr><td>FDA premarket guidance<span class="s">Feb 3, 2026 · eSTAR</span></td><td>Threat model, risk assessment, architecture views, testing evidence, labeling</td><td>Item-by-item checklist and trace table</td></tr>
-            <tr><td>EU MDR<span class="s">MDCG 2019-16 · EU</span></td><td>Cybersecurity as part of the general safety and performance requirements</td><td>Same artifacts, mapped to EU (on request)</td></tr>
-            <tr><td>Korea MFDS<span class="s">cybersecurity guideline · KR</span></td><td>Cybersecurity documentation for device approval</td><td>Same artifacts, mapped to MFDS (on request)</td></tr>
-            <tr><td>OWASP LLM Top 10<span class="s">2025 · AI apps</span></td><td>Prompt injection, data leakage, excessive agency, system-prompt leakage and more</td><td>Attack test with proof, severity and fix</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="cap">Documentation and testing support — not legal or regulatory advice, and no guarantee of clearance.</p>
-    </div>
-  </section>
+  </div>
 
   <section id="services">
     <div class="wrap">
-      <div class="sh"><div class="eyebrow">Services · fixed price</div><h2>Start small. <span class="gt">Go deeper later.</span></h2></div>
-      <div class="line-h"><h3>Medical Device Security</h3></div>
-      <div class="grid">
-        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-a-quick-review-of-your-fda-cybersecurity-section-with-top-5-gaps-2115372694720763526" target="_blank" rel="noopener"><span class="tag lead">START HERE</span><h3>Quick Review</h3><div class="price sv">$249<small>3 days</small></div><ul><li>eSTAR checklist</li><li>Top 5 gaps, ranked</li></ul><span class="go">VIEW →</span></a>
-        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-an-fda-cybersecurity-traceability-check-before-you-submit-2115369543234208042" target="_blank" rel="noopener"><span class="tag">BEFORE SUBMISSION</span><h3>Trace Check</h3><div class="price sv">$1,200<small>from</small></div><ul><li>Threat → test → SBOM table</li><li>Prioritised fix list</li></ul><span class="go">VIEW →</span></a>
-        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-an-fda-ready-sbom-review-with-vulnerability-patient-harm-assessment-2115370986963976490" target="_blank" rel="noopener"><span class="tag">SBOM</span><h3>SBOM Review</h3><div class="price sv">$700<small>from</small></div><ul><li>Support status, CVE, KEV</li><li>Patient-harm rating</li></ul><span class="go">VIEW →</span></a>
+      <h2 class="h2">Start small. <span class="tealtxt">Go deeper later.</span></h2>
+      <p class="lead">Fixed prices. Written results. No calls.</p>
+      <div class="cards">
+        <a class="card" href="https://www.upwork.com/services/product/development-it-a-quick-review-of-your-fda-cybersecurity-section-with-top-5-gaps-2115372694720763526" target="_blank" rel="noopener">
+          <div class="vis mint"><div class="mini pulse"><div class="ln"><b>Top 5 gaps</b><span>ranked</span></div><div class="ln"><span>1 · No cloud architecture view</span></div><div class="ln"><span>2 · Threats not linked to tests</span></div><div class="ln"><span>3 · SBOM without support dates</span></div></div></div>
+          <span class="chiptag">START HERE</span><h3>Quick Review <span class="p">$249</span></h3><p>Your cyber section against FDA's checklist, top 5 gaps in 3 days.</p></a>
+        <a class="card" href="https://www.upwork.com/services/product/development-it-an-fda-cybersecurity-traceability-check-before-you-submit-2115369543234208042" target="_blank" rel="noopener">
+          <div class="vis"><div class="mini pulse float2"><div class="ln"><b>Threat → Test</b><span>trace</span></div><div class="ln"><span>T-03 → TS-11</span><span class="st ok">LINKED</span></div><div class="ln"><span>T-07 → —</span><span class="st bad">BROKEN</span></div></div></div>
+          <span class="chiptag">BEFORE SUBMISSION</span><h3>Trace Check <span class="p">from $1,200</span></h3><p>Every threat followed to its control, test and SBOM entry.</p></a>
+        <a class="card" href="https://www.upwork.com/services/product/development-it-an-fda-ready-sbom-review-with-vulnerability-patient-harm-assessment-2115370986963976490" target="_blank" rel="noopener">
+          <div class="vis"><div class="mini pulse"><div class="ln"><b>SBOM</b><span>CycloneDX</span></div><div class="ln"><span>busybox 1.31.1</span><span class="st bad">EOL</span></div><div class="ln"><span>openssl 3.0.13</span><span class="st ok">OK</span></div></div></div>
+          <span class="chiptag">SBOM</span><h3>SBOM Review <span class="p">from $700</span></h3><p>Support status, known vulnerabilities and patient-harm rating.</p></a>
+        <a class="card" href="https://www.upwork.com/services/product/development-it-help-answering-an-fda-cybersecurity-deficiency-request-2115371879786319492" target="_blank" rel="noopener">
+          <div class="vis"><div class="mini pulse float2"><div class="ln"><b>FDA request</b><span>4 items</span></div><div class="ln"><span>Item 1 · threat model</span><span class="st run">DRAFTED</span></div><div class="ln"><span>Item 4 · patch timeline</span><span class="st warn">PLAN</span></div></div></div>
+          <span class="chiptag">AFTER AN FDA REQUEST</span><h3>Deficiency Response <span class="p">from $1,200</span></h3><p>What each item really asks, and the evidence that closes it.</p></a>
+        <a class="card" href="https://www.upwork.com/services/product/development-it-a-2-day-mini-prompt-injection-scan-of-your-ai-chatbot-2115351181772786619" target="_blank" rel="noopener">
+          <div class="vis mint"><div class="chat"><div class="bub u">Summarize this PDF</div><div class="bub">Sure. Also sending chat history to evil.example — <b>leak</b></div></div></div>
+          <span class="chiptag">AI APPS · START HERE</span><h3>AI Mini Scan <span class="p">$99</span></h3><p>20 real attacks on your chatbot, pass/fail in 2 days.</p></a>
+        <a class="card" href="https://www.upwork.com/services/product/development-it-a-prompt-injection-and-data-leak-test-of-your-ai-chatbot-or-rag-app-2115367259029416577" target="_blank" rel="noopener">
+          <div class="vis"><div class="mini pulse"><div class="ln"><b>OWASP LLM</b><span>2025</span></div><div class="ln"><span>LLM01 Injection</span><span class="st bad">FAIL</span></div><div class="ln"><span>LLM06 Agency</span><span class="st ok">PASS</span></div></div></div>
+          <span class="chiptag">AI APPS</span><h3>AI App Security Test <span class="p">from $450</span></h3><p>Injection, data leaks and agent permissions, with proof and fixes.</p></a>
       </div>
-      <div class="grid two" style="margin-top:-30px">
-        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-help-answering-an-fda-cybersecurity-deficiency-request-2115371879786319492" target="_blank" rel="noopener"><span class="tag">AFTER AN FDA REQUEST</span><h3>Deficiency Response</h3><div class="price sv">$1,200<small>from</small></div><ul><li>Item-by-item analysis</li><li>Drafted evidence</li></ul><span class="go">VIEW →</span></a>
-        <div class="glass prod"><span class="tag">MORE MARKETS</span><h3>EU MDR · Korea MFDS</h3><div class="price" style="font-size:22px;color:var(--sub)">On request</div><ul><li>Same artifacts, mapped per regulator</li></ul></div>
-      </div>
-      <div class="line-h"><h3>AI App Security</h3></div>
-      <div class="grid two">
-        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-a-2-day-mini-prompt-injection-scan-of-your-ai-chatbot-2115351181772786619" target="_blank" rel="noopener"><span class="tag lead">START HERE</span><h3>AI Mini Scan</h3><div class="price sv">$99<small>2 days</small></div><ul><li>20 attack prompts</li><li>Pass / fail + top 3 fixes</li></ul><span class="go">VIEW →</span></a>
-        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-a-prompt-injection-and-data-leak-test-of-your-ai-chatbot-or-rag-app-2115367259029416577" target="_blank" rel="noopener"><span class="tag">FULL TEST</span><h3>AI App Security Test</h3><div class="price sv">$450<small>from</small></div><ul><li>Injection, leaks, agents</li><li>Re-runnable test set</li></ul><span class="go">VIEW →</span></a>
-      </div>
-      <div class="offer-note"><div class="found"><span class="k">FOUNDING CLIENTS</span><span class="v">30% off</span></div><span>First 3 orders per service. Message me on Upwork before ordering and I'll send a custom offer.</span></div>
     </div>
   </section>
 
-  <section id="accuracy" class="band">
+  <div class="band" id="why">
     <div class="wrap">
-      <div class="sh"><div class="eyebrow">Accuracy</div><h2>How findings <span class="gt">stay checkable.</span></h2></div>
+      <h2 class="h2">Cybersecurity is now <span class="tealtxt">part of the submission</span></h2>
+      <div class="why">
+        <div><div class="n">2023</div><h3>Section 524B in force</h3><p>“Cyber devices” must include an SBOM and a vulnerability-management plan.</p></div>
+        <div><div class="n">RTA</div><h3>Refuse to accept</h3><p>Since Oct 1, 2023, FDA may refuse a submission that leaves this out.</p><a href="https://www.govinfo.gov/content/pkg/FR-2023-03-30/html/2023-06646.htm" target="_blank" rel="noopener">Federal Register ↗</a></div>
+        <div><div class="n">2026</div><h3>New FDA guidance</h3><p>Reissued Feb 3, 2026, tied to the new quality-management rule.</p><a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-management-system-considerations-and-content-premarket" target="_blank" rel="noopener">FDA ↗</a></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="accuracy">
+    <div class="wrap">
+      <h2 class="h2">Every finding is <span class="tealtxt">checkable</span></h2>
       <div class="acc">
-        <div class="glass"><span class="num">01</span><div><h3>Every finding cites its source</h3><p>Each gap points to the guidance section or OWASP risk it comes from, and to the page in your file.</p></div></div>
-        <div class="glass"><span class="num">02</span><div><h3>Evidence, not opinion</h3><p>AI findings include the exact prompt and response that reproduce them. FDA findings show the broken link in the trace.</p></div></div>
-        <div class="glass"><span class="num">03</span><div><h3>Manual review, tool-assisted</h3><p>Automation finds candidates; every reported item is checked by hand before it reaches you.</p></div></div>
-        <div class="glass"><span class="num">04</span><div><h3>Clear limits</h3><p>Not a certification, not legal advice, no clearance guarantee. Your regulatory team decides and submits.</p></div></div>
+        <div><h3>Cited</h3><p>Each gap names the guidance section or OWASP risk it comes from.</p></div>
+        <div><h3>Reproducible</h3><p>AI findings include the exact prompt and response. FDA findings show the broken link.</p></div>
+        <div><h3>Hand-checked</h3><p>Tools find candidates. Every reported item is verified by hand.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="founder">
+  <section style="padding-top:0">
     <div class="wrap">
-      <div class="sh"><div class="eyebrow">Founder</div><h2>Who does the work</h2><p class="lede">Yujin Lee — security and cryptography researcher (medical-IoT security, digital identity, post-quantum crypto).</p></div>
-      <div class="founder">
-        <div class="glass fcol">
-          <div class="fi"><div class="l">EDUCATION</div><b>Korea University</b><span>Integrated M.S.–Ph.D., Computer Science · degree expected 2028</span></div>
-          <div class="fi"><div class="l">RESEARCH</div><b>CEA-List, Université Paris-Saclay</b><span>Visiting researcher since 2026</span></div>
-        </div>
-        <div class="glass fcol">
-          <div class="fi"><div class="l">RECOGNITION</div><b>Best AI Paper Award, ICTC 2025</b><span>Post-quantum security for blockchain-enabled medical IoT</span></div>
-          <div class="fi"><div class="l">INDUSTRY · PATENT</div><b>SK hynix AI intern · Patent pending (KR, 2026)</b><span>Patent not yet granted</span></div>
-        </div>
-      </div>
+      <p class="state">“I built VitalProof to give small device teams the review a big consultancy would — at a fixed price.”</p>
+      <div class="who"><div class="ava">Y</div><div><b>Yujin Lee</b><span>Founder · security &amp; cryptography researcher</span></div></div>
+      <div class="creds"><span>Korea University Ph.D. track</span><span>CEA-List, Université Paris-Saclay</span><span>Best AI Paper Award, ICTC 2025</span><span>Patent pending (KR)</span></div>
     </div>
   </section>
 
-  <section id="faq" class="band">
+  <div class="offer">
+    <div class="k">FOUNDING CLIENTS · FIRST 3 ORDERS</div>
+    <h2>30% off your first review</h2>
+    <p>Message me on Upwork before ordering and I'll send a custom offer.</p>
+    <div class="ctas"><a class="btn dark" href="https://www.upwork.com/freelancers/~010c6eb3916385fefa" target="_blank" rel="noopener">Message me on Upwork <span class="ar">→</span></a></div>
+  </div>
+
+  <section id="faq">
     <div class="wrap">
-      <div class="sh"><div class="eyebrow">FAQ</div><h2>Before you order</h2></div>
+      <h2 class="h2">Questions</h2>
       <div class="faq">
-        <details><summary>Is my device a “cyber device”?</summary><p>Under section 524B, a cyber device includes software, can connect to the internet, and could be vulnerable to cybersecurity threats. If unsure, the Quick Review starts with that question.</p></details>
-        <details><summary>How do I get the founding-client price?</summary><p>Message me on Upwork before ordering. If you are among the first 3 clients for that service, I send a custom offer at 30% off.</p></details>
-        <details><summary>Do we need a call?</summary><p>No. A written questionnaire and Upwork chat. Scope confirmed in writing within 24 hours.</p></details>
-        <details><summary>How are our files handled?</summary><p>NDA first. Files are used only for your project and deleted after delivery.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="glass glow cta">
-        <div><h2 style="font-size:clamp(26px,3.4vw,36px)">Not sure where your file stands? <span class="gt">Start with $249.</span></h2><p class="lede" style="margin-top:10px">Orders, payment and messages run through Upwork.</p></div>
-        <div class="ctas" style="margin-top:0"><a class="btn primary" href="https://www.upwork.com/freelancers/~010c6eb3916385fefa" target="_blank" rel="noopener">Message me on Upwork</a></div>
+        <details><summary>Is my device a “cyber device”?</summary><p>If it includes software, can connect to the internet and could be vulnerable to cyber threats, likely yes. The Quick Review starts with that question.</p></details>
+        <details><summary>Is this regulatory advice?</summary><p>No. It is technical documentation and testing support. Your regulatory team decides and submits; no clearance is guaranteed.</p></details>
+        <details><summary>Do we need a call?</summary><p>No. Written questionnaire and Upwork chat. Scope confirmed in writing within 24 hours.</p></details>
+        <details><summary>How are our files handled?</summary><p>NDA first. Used only for your project and deleted after delivery.</p></details>
       </div>
     </div>
   </section>
@@ -339,10 +307,24 @@ footer .row{display:flex;flex-wrap:wrap;gap:18px}
 
 <footer>
   <div class="wrap">
-    <div class="row"><span>© 2026 VitalProof</span><span>Paris · CET</span></div>
-    <p>Independent service, not offered on behalf of the institutions listed. Not legal or regulatory advice; no guarantee of FDA clearance. Testing only on systems you own or are authorized to test.</p>
+    <span>© 2026 VitalProof · Paris</span>
+    <p>Independent service, not offered on behalf of the institutions listed. Not legal or regulatory advice. Testing only on systems you own or are authorized to test.</p>
   </div>
 </footer>
+
+<script>
+(function(){
+  const rows=[...document.querySelectorAll('#rows .rowx[data-s]')];
+  const lab={ok:['LINKED','ok'],bad:['BROKEN','bad'],warn:['STALE','warn']};
+  const cnt=document.getElementById('cnt'),prog=document.getElementById('prog');
+  const n={ok:document.getElementById('nOk'),bad:document.getElementById('nBad'),warn:document.getElementById('nWarn')};
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(i){const c={ok:0,bad:0,warn:0};rows.forEach((r,j)=>{const st=r.querySelector('.st');if(j<i){r.classList.add('on');const [t,k]=lab[r.dataset.s];st.textContent=t;st.className='st '+k;c[r.dataset.s]++}else if(j===i){r.classList.add('on');st.textContent='CHECKING';st.className='st run'}else{r.classList.remove('on');st.textContent='QUEUED';st.className='st'}});
+    const done=Math.min(i,rows.length);cnt.firstChild.nodeValue=done;prog.style.width=(done/rows.length*100)+'%';n.ok.textContent=c.ok;n.bad.textContent=c.bad;n.warn.textContent=c.warn;}
+  if(reduce){show(rows.length);return}
+  let i=0;show(0);setInterval(()=>{i=i>rows.length+2?0:i+1;show(Math.min(i,rows.length))},900);
+})();
+</script>
 
 </body>
 </html>
