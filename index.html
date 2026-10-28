@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="VitalProof — FDA cybersecurity documentation & AI app security">
+<meta property="og:description" content="Section 524B gap reviews, SBOM review, trace checks and AI app security testing. Fixed prices, no calls.">
+<title>VitalProof</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="VitalProof — FDA medical device cybersecurity documentation and AI app security testing. Fixed prices, written deliverables, no calls.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap">
+<style>
+/* Layout: premium dark — glow + grain hero with live-looking findings card, two service lines as product grids linking to Upwork, process, sample, founder, FAQ. Matches the v10 gallery set. */
+:root{
+  color-scheme: dark;
+  --bg:#05070f; --bg2:#080c19; --glass:#0a1022; --line:#1c2742; --hair:#2b3858;
+  --ink:#eef2f9; --sub:#9aa7c0; --faint:#66728c;
+  --blue:#7aa0f5; --teal:#6edccd; --violet:#8e78ff; --red:#e86e6e; --amber:#e2b260;
+  --grad:linear-gradient(100deg,#e8f0ff 0%,#6edccd 100%);
+  --silver:linear-gradient(180deg,#f6f8fc 0%,#b0c4de 100%);
+  --display:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
+  --body:"Manrope","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.025em}
+h2{font-size:clamp(30px,4.2vw,44px);line-height:1.1;font-weight:800}
+h3{font-size:19px;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.lede{color:var(--sub);font-size:17px;max-width:60ch}
+.gt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sv{background:var(--silver);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* atmosphere */
+.atmo{position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+   radial-gradient(700px 480px at 88% -6%, rgba(40,90,210,.30), transparent 70%),
+   radial-gradient(600px 460px at 100% 95%, rgba(20,120,120,.20), transparent 70%),
+   radial-gradient(560px 420px at -10% 90%, rgba(70,50,170,.22), transparent 70%)}
+.atmo::after{content:"";position:absolute;inset:0;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(5,7,15,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:18px;text-decoration:none}
+.mark{width:26px;height:26px;border-radius:8px;background:radial-gradient(circle at 30% 30%,#6edccd,#1d5f86 75%);box-shadow:0 0 22px rgba(110,220,205,.35);position:relative}
+.mark::after{content:"";position:absolute;inset:8px;border:2px solid var(--bg);border-radius:50%}
+nav{display:flex;gap:24px;font-size:14px;color:var(--sub)}
+nav a{text-decoration:none}nav a:hover{color:var(--ink)}
+@media (max-width:820px){nav{display:none}}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:14px;padding:12px 20px;border-radius:12px;text-decoration:none;border:1px solid transparent;transition:transform .15s,box-shadow .15s,border-color .15s}
+.btn.primary{background:linear-gradient(100deg,#9fc0ff,#6edccd);color:#04101a;box-shadow:0 8px 30px -10px rgba(110,220,205,.6)}
+.btn.primary:hover{transform:translateY(-1px)}
+.btn.ghost{border-color:var(--hair);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--teal)}
+
+/* founding badge */
+.found{display:inline-flex;align-items:center;gap:12px;padding:8px 16px 8px 14px;border-radius:999px;background:rgba(10,20,34,.8);border:1px solid rgba(110,220,205,.5);box-shadow:0 0 30px -8px rgba(110,220,205,.45)}
+.found .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--teal);font-weight:700}
+.found .v{font-family:var(--display);font-weight:800;font-size:14px}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-block:72px 80px}
+@media (max-width:920px){.hero .wrap{grid-template-columns:1fr;padding-block:48px 56px}}
+.hero h1{font-size:clamp(40px,6vw,66px);line-height:1.02;font-weight:800;margin:20px 0}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:7px 12px;border-radius:8px;border:1px solid var(--hair);color:#c8d4eb;background:rgba(10,16,32,.7)}
+.chip.on{color:var(--teal);border-color:rgba(110,220,205,.45)}
+
+.glass{position:relative;background:rgba(9,14,30,.92);border-radius:24px;min-width:0}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,#96b4f0,#6ed2c8);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.glass.glow{box-shadow:0 40px 90px -40px rgba(60,120,255,.55)}
+.card-head{display:flex;justify-content:space-between;padding:22px 26px 6px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--sub);font-weight:700}
+.card-head span:last-child{color:var(--faint);font-weight:400}
+.find{padding:18px 26px;border-top:1px solid #16203a}
+.find:first-of-type{border-top:0}
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;padding:4px 12px;border-radius:999px;border:1.4px solid;background:#0e1426}
+.p-crit{color:var(--red);border-color:var(--red)}.p-high{color:#ec8c60;border-color:#ec8c60}.p-med{color:var(--amber);border-color:var(--amber)}.p-ok{color:var(--teal);border-color:var(--teal)}.p-low{color:#c8d4eb;border-color:#c8d4eb}
+.find .t{font-weight:700;font-size:16px;margin-top:10px}
+.find .f{color:var(--sub);font-size:13.5px;margin-top:2px}
+
+section{padding-block:88px}
+.sh{display:grid;gap:14px;margin-bottom:44px;max-width:760px}
+.band{background:linear-gradient(180deg,rgba(8,12,25,.75),rgba(8,12,25,.35));border-block:1px solid var(--line)}
+
+/* products */
+.line-h{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:8px 0 18px}
+.line-h h3{font-size:22px}
+.line-h p{color:var(--sub);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:48px}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+@media (max-width:900px){.grid,.grid.two{grid-template-columns:1fr}}
+.prod{display:flex;flex-direction:column;gap:14px;padding:26px;text-decoration:none;transition:transform .18s}
+.prod:hover{transform:translateY(-3px)}
+.prod .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--faint);font-weight:700}
+.prod .tag.lead{color:var(--teal)}
+.price{font-family:var(--display);font-weight:800;font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-family:var(--body);font-size:14px;font-weight:600;color:var(--sub);margin-left:6px;-webkit-text-fill-color:var(--sub)}
+.prod ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;color:#d6deee;font-size:14.5px}
+.prod li{display:flex;gap:10px}
+.prod li::before{content:"";flex:none;width:14px;height:8px;margin-top:6px;border-left:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg)}
+.prod .go{margin-top:auto;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--teal)}
+.offer-note{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:22px 26px;border-radius:18px;border:1px dashed rgba(110,220,205,.45);background:rgba(10,22,34,.5)}
+.offer-note b{font-family:var(--display)}
+.offer-note span{color:var(--sub);font-size:14.5px}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+.step{padding:28px;display:grid;gap:10px;align-content:start}
+.step .n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--teal)}
+.step .n span{color:var(--faint);font-weight:400;margin-left:10px}
+.step h3{font-size:26px;font-weight:800}
+.step p{color:var(--sub);font-size:15px}
+.step .get{border-top:1px solid var(--hair);padding-top:14px;margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--teal);font-weight:700}
+.step .get b{display:block;font-family:var(--body);font-size:15px;letter-spacing:0;color:var(--ink);margin-top:4px}
+
+/* table */
+.tw{overflow-x:auto;border-radius:22px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+th,td{text-align:left;padding:16px 24px;border-bottom:1px solid #16203a;vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--faint);font-weight:700}
+tr:last-child td{border-bottom:0}
+td .fx{color:var(--sub);font-size:13px;margin-top:3px}
+td.o{font-family:var(--mono);font-size:12.5px;color:var(--sub);white-space:nowrap}
+.cap{margin-top:12px;font-size:12.5px;color:var(--faint);font-family:var(--mono)}
+
+/* founder */
+.founder{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:820px){.founder{grid-template-columns:1fr}}
+.fcol{padding:28px;display:grid;gap:22px;align-content:start}
+.fi .l{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--teal);font-weight:700;margin-bottom:6px}
+.fi b{font-family:var(--display);font-size:18px;display:block}
+.fi span{color:var(--sub);font-size:14px}
+.terms{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+
+/* faq */
+.faq{max-width:820px;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:22px 0;font-family:var(--display);font-weight:700;font-size:17px;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--teal);font-family:var(--mono)}
+details[open] summary::after{content:"–"}
+details p{color:var(--sub);padding-bottom:22px;max-width:68ch}
+
+.cta{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:40px}
+@media (max-width:760px){.cta{grid-template-columns:1fr;padding:28px}}
+footer{border-top:1px solid var(--line);padding-block:34px 44px;color:var(--faint);font-size:12.5px;font-family:var(--mono)}
+footer .wrap{display:grid;gap:10px}
+footer .row{display:flex;flex-wrap:wrap;gap:18px}
+
+/* v3 additions: audience cards, why-strip, rules table, accuracy list */
+.hero h1{font-size:clamp(38px,5.4vw,60px)}
+.for{font-family:var(--mono);font-size:12.5px;color:var(--sub);margin-top:18px;letter-spacing:.02em}
+.for b{color:var(--ink);font-weight:700}
+.aud{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:900px){.aud{grid-template-columns:1fr}}
+.aud .glass{padding:26px;display:grid;gap:10px;align-content:start}
+.aud .who{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--teal);font-weight:700}
+.aud h3{font-size:21px}
+.aud p{color:var(--sub);font-size:15px}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+@media (max-width:900px){.why{grid-template-columns:1fr}}
+.why div{padding:26px 26px 26px 0;border-bottom:1px solid var(--line)}
+.why .big{font-family:var(--display);font-weight:800;font-size:30px;line-height:1.1;letter-spacing:-.02em}
+.why p{color:var(--sub);font-size:14.5px;margin-top:8px}
+.why a{color:var(--faint);font-family:var(--mono);font-size:11.5px}
+.rules td:first-child{font-family:var(--display);font-weight:700;white-space:nowrap}
+.rules td{color:#d6deee}
+.rules td .s{display:block;font-family:var(--mono);font-size:11.5px;color:var(--faint);font-weight:400;margin-top:2px}
+.acc{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media (max-width:820px){.acc{grid-template-columns:1fr}}
+.acc .glass{padding:26px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.acc .num{font-family:var(--mono);font-weight:700;color:var(--teal);font-size:14px;padding-top:3px}
+.acc h3{font-size:18px}
+.acc p{color:var(--sub);font-size:14.5px;margin-top:4px}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.tabs .chip{font-size:12px}
+</style>
+
+</head>
+<body>
+<div class="atmo" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>VitalProof</a>
+    <nav aria-label="Sections"><a href="#who">Who it's for</a><a href="#why">Why now</a><a href="#rules">Rules covered</a><a href="#services">Services</a><a href="#accuracy">Accuracy</a></nav>
+    <a class="btn primary" href="https://www.upwork.com/freelancers/~010c6eb3916385fefa" target="_blank" rel="noopener">Order on Upwork</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <div class="found"><span class="k">FOUNDING CLIENTS</span><span class="v">30% off · first 3 orders</span></div>
+        <h1>Get your device's <span class="gt">FDA cybersecurity file</span> right before you submit.</h1>
+        <p class="lede">I check your section 524B documentation against FDA's current guidance and tell you exactly what is missing, broken or out of date — with the fix.</p>
+        <p class="for">FOR <b>medical device makers</b> preparing a 510(k), De Novo or PMA · also <b>AI app teams</b> testing chatbots and agents</p>
+        <div class="ctas">
+          <a class="btn primary" href="https://www.upwork.com/services/product/development-it-a-quick-review-of-your-fda-cybersecurity-section-with-top-5-gaps-2115372694720763526" target="_blank" rel="noopener">Start with a $249 review</a>
+          <a class="btn ghost" href="#rules">What rules this covers</a>
+        </div>
+      </div>
+      <div class="glass glow" role="figure" aria-label="Example trace findings">
+        <div class="card-head"><span>WHAT YOU GET BACK</span><span>SAMPLE</span></div>
+        <div class="find"><span class="pill p-crit">BROKEN</span><div class="t">Threat T-07 has no test</div><div class="f">Fix: add a test case or the residual-risk rationale</div></div>
+        <div class="find"><span class="pill p-high">MISSING</span><div class="t">3 SBOM parts lack support status</div><div class="f">Fix: add end-of-support dates and monitoring</div></div>
+        <div class="find"><span class="pill p-med">STALE</span><div class="t">Pen test predates the final build</div><div class="f">Fix: re-test, or justify equivalence</div></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="who" class="band">
+    <div class="wrap">
+      <div class="sh"><div class="eyebrow">Who it's for</div><h2>Three situations <span class="gt">I help with.</span></h2></div>
+      <div class="aud">
+        <div class="glass"><span class="who">BEFORE SUBMISSION</span><h3>You are about to file with FDA</h3><p>Connected device, 510(k) / De Novo / PMA coming up, and nobody has checked the cybersecurity section end to end.</p></div>
+        <div class="glass"><span class="who">AFTER AN FDA REQUEST</span><h3>FDA asked about cybersecurity</h3><p>You received an additional-information request and need to know what evidence closes each item.</p></div>
+        <div class="glass"><span class="who">AI PRODUCTS</span><h3>Your app has a chatbot or agent</h3><p>It reads documents, web pages or e-mail, and you have not tested what a hidden instruction can make it do.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="sh"><div class="eyebrow">Why it matters now</div><h2>Cybersecurity is <span class="gt">part of the submission.</span></h2></div>
+      <div class="why">
+        <div><div class="big">Section 524B</div><p>Since March 2023, US law requires “cyber devices” to include cybersecurity information in premarket submissions — including an SBOM and a vulnerability-management plan.</p></div>
+        <div><div class="big">Refuse to accept</div><p>From October 1, 2023, FDA may refuse to accept a cyber-device submission that leaves this information out. <a href="https://www.govinfo.gov/content/pkg/FR-2023-03-30/html/2023-06646.htm" target="_blank" rel="noopener">Federal Register ↗</a></p></div>
+        <div><div class="big">2026 guidance</div><p>FDA's premarket cybersecurity guidance was reissued on February 3, 2026, aligned with the new quality-management rule (QMSR). <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-management-system-considerations-and-content-premarket" target="_blank" rel="noopener">FDA ↗</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules" class="band">
+    <div class="wrap">
+      <div class="sh"><div class="eyebrow">Rules covered</div><h2>What I check <span class="gt">your work against.</span></h2></div>
+      <div class="glass tw">
+        <table class="rules">
+          <thead><tr><th>RULE / STANDARD</th><th>WHAT IT ASKS FOR</th><th>WHAT YOU GET</th></tr></thead>
+          <tbody>
+            <tr><td>FDA · Section 524B<span class="s">FD&amp;C Act · US</span></td><td>SBOM, vulnerability-management plan, evidence of reasonable assurance of cybersecurity</td><td>Gap list and SBOM review</td></tr>
+            <tr><td>FDA premarket guidance<span class="s">Feb 3, 2026 · eSTAR</span></td><td>Threat model, risk assessment, architecture views, testing evidence, labeling</td><td>Item-by-item checklist and trace table</td></tr>
+            <tr><td>EU MDR<span class="s">MDCG 2019-16 · EU</span></td><td>Cybersecurity as part of the general safety and performance requirements</td><td>Same artifacts, mapped to EU (on request)</td></tr>
+            <tr><td>Korea MFDS<span class="s">cybersecurity guideline · KR</span></td><td>Cybersecurity documentation for device approval</td><td>Same artifacts, mapped to MFDS (on request)</td></tr>
+            <tr><td>OWASP LLM Top 10<span class="s">2025 · AI apps</span></td><td>Prompt injection, data leakage, excessive agency, system-prompt leakage and more</td><td>Attack test with proof, severity and fix</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cap">Documentation and testing support — not legal or regulatory advice, and no guarantee of clearance.</p>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sh"><div class="eyebrow">Services · fixed price</div><h2>Start small. <span class="gt">Go deeper later.</span></h2></div>
+      <div class="line-h"><h3>Medical Device Security</h3></div>
+      <div class="grid">
+        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-a-quick-review-of-your-fda-cybersecurity-section-with-top-5-gaps-2115372694720763526" target="_blank" rel="noopener"><span class="tag lead">START HERE</span><h3>Quick Review</h3><div class="price sv">$249<small>3 days</small></div><ul><li>eSTAR checklist</li><li>Top 5 gaps, ranked</li></ul><span class="go">VIEW →</span></a>
+        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-an-fda-cybersecurity-traceability-check-before-you-submit-2115369543234208042" target="_blank" rel="noopener"><span class="tag">BEFORE SUBMISSION</span><h3>Trace Check</h3><div class="price sv">$1,200<small>from</small></div><ul><li>Threat → test → SBOM table</li><li>Prioritised fix list</li></ul><span class="go">VIEW →</span></a>
+        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-an-fda-ready-sbom-review-with-vulnerability-patient-harm-assessment-2115370986963976490" target="_blank" rel="noopener"><span class="tag">SBOM</span><h3>SBOM Review</h3><div class="price sv">$700<small>from</small></div><ul><li>Support status, CVE, KEV</li><li>Patient-harm rating</li></ul><span class="go">VIEW →</span></a>
+      </div>
+      <div class="grid two" style="margin-top:-30px">
+        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-help-answering-an-fda-cybersecurity-deficiency-request-2115371879786319492" target="_blank" rel="noopener"><span class="tag">AFTER AN FDA REQUEST</span><h3>Deficiency Response</h3><div class="price sv">$1,200<small>from</small></div><ul><li>Item-by-item analysis</li><li>Drafted evidence</li></ul><span class="go">VIEW →</span></a>
+        <div class="glass prod"><span class="tag">MORE MARKETS</span><h3>EU MDR · Korea MFDS</h3><div class="price" style="font-size:22px;color:var(--sub)">On request</div><ul><li>Same artifacts, mapped per regulator</li></ul></div>
+      </div>
+      <div class="line-h"><h3>AI App Security</h3></div>
+      <div class="grid two">
+        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-a-2-day-mini-prompt-injection-scan-of-your-ai-chatbot-2115351181772786619" target="_blank" rel="noopener"><span class="tag lead">START HERE</span><h3>AI Mini Scan</h3><div class="price sv">$99<small>2 days</small></div><ul><li>20 attack prompts</li><li>Pass / fail + top 3 fixes</li></ul><span class="go">VIEW →</span></a>
+        <a class="glass prod" href="https://www.upwork.com/services/product/development-it-a-prompt-injection-and-data-leak-test-of-your-ai-chatbot-or-rag-app-2115367259029416577" target="_blank" rel="noopener"><span class="tag">FULL TEST</span><h3>AI App Security Test</h3><div class="price sv">$450<small>from</small></div><ul><li>Injection, leaks, agents</li><li>Re-runnable test set</li></ul><span class="go">VIEW →</span></a>
+      </div>
+      <div class="offer-note"><div class="found"><span class="k">FOUNDING CLIENTS</span><span class="v">30% off</span></div><span>First 3 orders per service. Message me on Upwork before ordering and I'll send a custom offer.</span></div>
+    </div>
+  </section>
+
+  <section id="accuracy" class="band">
+    <div class="wrap">
+      <div class="sh"><div class="eyebrow">Accuracy</div><h2>How findings <span class="gt">stay checkable.</span></h2></div>
+      <div class="acc">
+        <div class="glass"><span class="num">01</span><div><h3>Every finding cites its source</h3><p>Each gap points to the guidance section or OWASP risk it comes from, and to the page in your file.</p></div></div>
+        <div class="glass"><span class="num">02</span><div><h3>Evidence, not opinion</h3><p>AI findings include the exact prompt and response that reproduce them. FDA findings show the broken link in the trace.</p></div></div>
+        <div class="glass"><span class="num">03</span><div><h3>Manual review, tool-assisted</h3><p>Automation finds candidates; every reported item is checked by hand before it reaches you.</p></div></div>
+        <div class="glass"><span class="num">04</span><div><h3>Clear limits</h3><p>Not a certification, not legal advice, no clearance guarantee. Your regulatory team decides and submits.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="founder">
+    <div class="wrap">
+      <div class="sh"><div class="eyebrow">Founder</div><h2>Who does the work</h2><p class="lede">Yujin Lee — security and cryptography researcher (medical-IoT security, digital identity, post-quantum crypto).</p></div>
+      <div class="founder">
+        <div class="glass fcol">
+          <div class="fi"><div class="l">EDUCATION</div><b>Korea University</b><span>Integrated M.S.–Ph.D., Computer Science · degree expected 2028</span></div>
+          <div class="fi"><div class="l">RESEARCH</div><b>CEA-List, Université Paris-Saclay</b><span>Visiting researcher since 2026</span></div>
+        </div>
+        <div class="glass fcol">
+          <div class="fi"><div class="l">RECOGNITION</div><b>Best AI Paper Award, ICTC 2025</b><span>Post-quantum security for blockchain-enabled medical IoT</span></div>
+          <div class="fi"><div class="l">INDUSTRY · PATENT</div><b>SK hynix AI intern · Patent pending (KR, 2026)</b><span>Patent not yet granted</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="band">
+    <div class="wrap">
+      <div class="sh"><div class="eyebrow">FAQ</div><h2>Before you order</h2></div>
+      <div class="faq">
+        <details><summary>Is my device a “cyber device”?</summary><p>Under section 524B, a cyber device includes software, can connect to the internet, and could be vulnerable to cybersecurity threats. If unsure, the Quick Review starts with that question.</p></details>
+        <details><summary>How do I get the founding-client price?</summary><p>Message me on Upwork before ordering. If you are among the first 3 clients for that service, I send a custom offer at 30% off.</p></details>
+        <details><summary>Do we need a call?</summary><p>No. A written questionnaire and Upwork chat. Scope confirmed in writing within 24 hours.</p></details>
+        <details><summary>How are our files handled?</summary><p>NDA first. Files are used only for your project and deleted after delivery.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="glass glow cta">
+        <div><h2 style="font-size:clamp(26px,3.4vw,36px)">Not sure where your file stands? <span class="gt">Start with $249.</span></h2><p class="lede" style="margin-top:10px">Orders, payment and messages run through Upwork.</p></div>
+        <div class="ctas" style="margin-top:0"><a class="btn primary" href="https://www.upwork.com/freelancers/~010c6eb3916385fefa" target="_blank" rel="noopener">Message me on Upwork</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row"><span>© 2026 VitalProof</span><span>Paris · CET</span></div>
+    <p>Independent service, not offered on behalf of the institutions listed. Not legal or regulatory advice; no guarantee of FDA clearance. Testing only on systems you own or are authorized to test.</p>
+  </div>
+</footer>
+
+</body>
+</html>
